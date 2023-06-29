@@ -1,0 +1,14 @@
+.Button_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 57px;
+  width: 57px;
+  color: #f8f9fa;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #087f5b;
+  margin: 3px;
+  border: 2px solid #212529;
+  border-radius: 5px;
+}
