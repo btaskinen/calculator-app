@@ -2,26 +2,90 @@ import { useState } from 'react';
 import Button from './Button';
 import './App.css';
 
-const buttons = [
-  'AC',
-  'C',
-  '(',
-  ')',
-  '7',
-  '8',
-  '9',
-  '/',
-  '4',
-  '5',
-  '6',
-  '*',
-  '1',
-  '2',
-  '3',
-  '-',
-  '0',
-  '=',
-  '+',
+export type ButtonData = {
+  label: string;
+  color: string;
+};
+
+type Buttons = ButtonData[];
+
+const buttons: Buttons = [
+  {
+    label: 'AC',
+    color: 'darker',
+  },
+  {
+    label: '+/-',
+    color: 'darker',
+  },
+  {
+    label: '%',
+    color: 'darker',
+  },
+  {
+    label: '/',
+    color: 'dark',
+  },
+  {
+    label: '7',
+    color: 'light',
+  },
+  {
+    label: '8',
+    color: 'light',
+  },
+  {
+    label: '9',
+    color: 'light',
+  },
+  {
+    label: 'X',
+    color: 'dark',
+  },
+  {
+    label: '4',
+    color: 'light',
+  },
+  {
+    label: '5',
+    color: 'light',
+  },
+  {
+    label: '6',
+    color: 'light',
+  },
+  {
+    label: '-',
+    color: 'dark',
+  },
+  {
+    label: '1',
+    color: 'light',
+  },
+  {
+    label: '2',
+    color: 'light',
+  },
+  {
+    label: '3',
+    color: 'light',
+  },
+  {
+    label: '+',
+    color: 'dark',
+  },
+  {
+    label: '0',
+    color: 'light',
+  },
+  {
+    label: '.',
+    color: 'light',
+  },
+  {
+    label: '=',
+    color: 'dark',
+  },
 ];
 
 const App = () => {
