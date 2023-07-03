@@ -90,7 +90,7 @@ const buttons: Buttons = [
   },
   {
     label: '+',
-    type: 'NUMBER',
+    type: 'OPERATOR',
     color: 'dark',
   },
   {
@@ -111,8 +111,8 @@ const buttons: Buttons = [
 ];
 
 const App = () => {
-  const [displayNumber, setDisplayNumber] = useState(0);
-  const [calcNumber, setCalcNumber] = useState(0);
+  const [displayNumber, setDisplayNumber] = useState('0');
+  const [calcNumber, setCalcNumber] = useState('0');
   const [operator, setOperator] = useState('');
 
   const operatorButtonPressed = (label: string): void => setOperator(label);
@@ -121,30 +121,34 @@ const App = () => {
     console.log(operator);
     switch (operator) {
       case '':
-        if (displayNumber === 0) {
-          setDisplayNumber(Number(label));
-          setCalcNumber(Number(label));
+        if (displayNumber === '0') {
+          setDisplayNumber(label);
+          setCalcNumber(label);
         } else {
           const numberString = calcNumber + label;
-          setCalcNumber(Number(numberString));
-          setDisplayNumber(Number(numberString));
+          setCalcNumber(numberString);
+          setDisplayNumber(numberString);
         }
         break;
       case '+':
-        setDisplayNumber(Number(label));
-        setCalcNumber(calcNumber + Number(label));
+        setDisplayNumber(label);
+        const resultAddition = Number(calcNumber) + Number(label);
+        setCalcNumber(String(resultAddition));
         break;
       case '-':
-        setDisplayNumber(Number(label));
-        setCalcNumber(calcNumber - Number(label));
+        setDisplayNumber(label);
+        const resultSubstraction = Number(calcNumber) - Number(label);
+        setCalcNumber(String(resultSubstraction));
         break;
       case 'X':
-        setDisplayNumber(Number(label));
-        setCalcNumber(calcNumber * Number(label));
+        setDisplayNumber(label);
+        const resultMultiplication = Number(calcNumber) * Number(label);
+        setCalcNumber(String(resultMultiplication));
         break;
       case '/':
-        setDisplayNumber(Number(label));
-        setCalcNumber(calcNumber / Number(label));
+        setDisplayNumber(label);
+        const resultDivision = Number(calcNumber) / Number(label);
+        setCalcNumber(String(resultDivision));
         break;
     }
     setOperator('');
@@ -153,16 +157,18 @@ const App = () => {
   const actionButtonPressed = (label: string): void => {
     switch (label) {
       case 'AC':
-        setCalcNumber(0);
-        setDisplayNumber(0);
+        setCalcNumber('0');
+        setDisplayNumber('0');
         break;
       case '+/-':
-        setCalcNumber(calcNumber * -1);
-        setDisplayNumber(displayNumber * -1);
+        const changeSign = Number(calcNumber) * -1;
+        setCalcNumber(String(changeSign));
+        setDisplayNumber(String(changeSign));
         break;
       case '%':
-        setCalcNumber(calcNumber / 100);
-        setDisplayNumber(displayNumber / 100);
+        const calcPercentage = Number(calcNumber) / 100;
+        setCalcNumber(String(calcPercentage));
+        setDisplayNumber(String(calcPercentage));
         break;
       case '=':
         setDisplayNumber(calcNumber);
