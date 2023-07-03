@@ -115,43 +115,55 @@ const App = () => {
   const [calcNumber, setCalcNumber] = useState('0');
   const [operator, setOperator] = useState('');
 
-  const operatorButtonPressed = (label: string): void => setOperator(label);
+  const operatorButtonPressed = (label: string): void => {
+    switch (operator) {
+      case '':
+        setCalcNumber(displayNumber);
+        setOperator(label);
+        break;
+      case '+':
+        setCalcNumber(String(Number(displayNumber) + Number(calcNumber)));
+        break;
+      case '-':
+        setCalcNumber(String(Number(displayNumber) - Number(calcNumber)));
+        break;
+      case 'X':
+        setCalcNumber(String(Number(displayNumber) * Number(calcNumber)));
+        break;
+      case '-':
+        setCalcNumber(String(Number(displayNumber) / Number(calcNumber)));
+        break;
+    }
+    setOperator(label);
+  };
 
   const numberButtonPressed = (label: string): void => {
-    console.log(operator);
     switch (operator) {
       case '':
         if (displayNumber === '0') {
           setDisplayNumber(label);
           setCalcNumber(label);
         } else {
-          const numberString = calcNumber + label;
-          setCalcNumber(numberString);
-          setDisplayNumber(numberString);
+          setDisplayNumber(displayNumber + label);
         }
         break;
       case '+':
-        setDisplayNumber(label);
-        const resultAddition = Number(calcNumber) + Number(label);
+        const resultAddition = Number(displayNumber) + Number(label);
         setCalcNumber(String(resultAddition));
         break;
       case '-':
-        setDisplayNumber(label);
         const resultSubstraction = Number(calcNumber) - Number(label);
         setCalcNumber(String(resultSubstraction));
         break;
       case 'X':
-        setDisplayNumber(label);
         const resultMultiplication = Number(calcNumber) * Number(label);
         setCalcNumber(String(resultMultiplication));
         break;
       case '/':
-        setDisplayNumber(label);
         const resultDivision = Number(calcNumber) / Number(label);
         setCalcNumber(String(resultDivision));
         break;
     }
-    setOperator('');
   };
 
   const actionButtonPressed = (label: string): void => {
@@ -159,6 +171,7 @@ const App = () => {
       case 'AC':
         setCalcNumber('0');
         setDisplayNumber('0');
+        setOperator('');
         break;
       case '+/-':
         const changeSign = Number(calcNumber) * -1;
@@ -171,7 +184,28 @@ const App = () => {
         setDisplayNumber(String(calcPercentage));
         break;
       case '=':
+        switch (operator) {
+          case '':
+            break;
+          case '+':
+            const resultAddition = Number(displayNumber) + Number(label);
+            setCalcNumber(String(resultAddition));
+            break;
+          case '-':
+            const resultSubstraction = Number(calcNumber) - Number(label);
+            setCalcNumber(String(resultSubstraction));
+            break;
+          case 'X':
+            const resultMultiplication = Number(calcNumber) * Number(label);
+            setCalcNumber(String(resultMultiplication));
+            break;
+          case '/':
+            const resultDivision = Number(calcNumber) / Number(label);
+            setCalcNumber(String(resultDivision));
+            break;
+        }
         setDisplayNumber(calcNumber);
+        setOperator('');
         break;
     }
   };
