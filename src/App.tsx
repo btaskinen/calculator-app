@@ -105,7 +105,7 @@ const buttons: Buttons = [
   },
   {
     label: '=',
-    type: 'OPERATOR',
+    type: 'ACTION',
     color: 'dark',
   },
 ];
@@ -118,6 +118,7 @@ const App = () => {
   const operatorButtonPressed = (label: string): void => setOperator(label);
 
   const numberButtonPressed = (label: string): void => {
+    console.log(operator);
     switch (operator) {
       case '':
         if (displayNumber === 0) {
@@ -130,19 +131,21 @@ const App = () => {
         }
         break;
       case '+':
+        setDisplayNumber(Number(label));
         setCalcNumber(calcNumber + Number(label));
         break;
       case '-':
+        setDisplayNumber(Number(label));
         setCalcNumber(calcNumber - Number(label));
         break;
       case 'X':
+        setDisplayNumber(Number(label));
         setCalcNumber(calcNumber * Number(label));
         break;
       case '/':
+        setDisplayNumber(Number(label));
         setCalcNumber(calcNumber / Number(label));
         break;
-      case '=':
-        setDisplayNumber(calcNumber);
     }
     setOperator('');
   };
@@ -160,6 +163,9 @@ const App = () => {
       case '%':
         setCalcNumber(calcNumber / 100);
         setDisplayNumber(displayNumber / 100);
+        break;
+      case '=':
+        setDisplayNumber(calcNumber);
         break;
     }
   };
