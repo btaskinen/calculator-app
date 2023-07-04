@@ -124,23 +124,33 @@ const App = () => {
         setNewNumber(true);
         break;
       case '+':
-        setCalcNumber(String(Number(calcNumber) + Number(displayNumber)));
-        setDisplayNumber(String(Number(calcNumber) + Number(displayNumber)));
+        const resultAddition = Number(calcNumber) + Number(displayNumber);
+        setDisplayNumber(String(resultAddition));
+        setCalcNumber(String(resultAddition));
         setNewNumber(true);
         break;
       case '-':
-        setCalcNumber(String(Number(calcNumber) - Number(displayNumber)));
-        setDisplayNumber(String(Number(calcNumber) - Number(displayNumber)));
+        const resultSubstraction = Number(calcNumber) - Number(displayNumber);
+        setDisplayNumber(String(resultSubstraction));
+        setCalcNumber(String(resultSubstraction));
         setNewNumber(true);
         break;
       case 'X':
-        setCalcNumber(String(Number(calcNumber) * Number(displayNumber)));
-        setDisplayNumber(String(Number(calcNumber) * Number(displayNumber)));
+        const resultMultiplication = Number(calcNumber) * Number(displayNumber);
+        setDisplayNumber(String(resultMultiplication));
+        setCalcNumber(String(resultMultiplication));
         setNewNumber(true);
         break;
       case '/':
-        setCalcNumber(String(Number(calcNumber) / Number(displayNumber)));
-        setDisplayNumber(String(Number(calcNumber) / Number(displayNumber)));
+        const resultDivision = Number(calcNumber) / Number(displayNumber);
+        if (Number(calcNumber) % Number(displayNumber) !== 0) {
+          const roundedResultDivistion = resultDivision.toFixed(8);
+          setDisplayNumber(String(roundedResultDivistion));
+          setCalcNumber(String(roundedResultDivistion));
+        } else {
+          setDisplayNumber(String(resultDivision));
+          setCalcNumber(String(resultDivision));
+        }
         setNewNumber(true);
         break;
     }
@@ -165,12 +175,12 @@ const App = () => {
         setNewNumber(true);
         break;
       case '+/-':
-        const changeSign = Number(calcNumber) * -1;
+        const changeSign = Number(displayNumber) * -1;
         setCalcNumber(String(changeSign));
         setDisplayNumber(String(changeSign));
         break;
       case '%':
-        const calcPercentage = Number(calcNumber) / 100;
+        const calcPercentage = Number(displayNumber) / 100;
         setCalcNumber(String(calcPercentage));
         setDisplayNumber(String(calcPercentage));
         break;
@@ -197,8 +207,14 @@ const App = () => {
             break;
           case '/':
             const resultDivision = Number(calcNumber) / Number(displayNumber);
-            setDisplayNumber(String(resultDivision));
-            setCalcNumber(String(resultDivision));
+            if (Number(calcNumber) % Number(displayNumber) !== 0) {
+              const roundedResultDivistion = resultDivision.toFixed(8);
+              setDisplayNumber(String(roundedResultDivistion));
+              setCalcNumber(String(roundedResultDivistion));
+            } else {
+              setDisplayNumber(String(resultDivision));
+              setCalcNumber(String(resultDivision));
+            }
             break;
         }
         setOperator('');
@@ -218,6 +234,8 @@ const App = () => {
         operatorButtonPressed(label);
     }
   };
+
+  if (displayNumber.length > 14) setDisplayNumber('ERROR');
 
   return (
     <div className="App">
