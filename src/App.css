@@ -1,24 +1,28 @@
-#root {
+body {
   --border: #03071e;
+  --lightBorder: #faa307;
   --background: #370617;
+  --lighter: #e85d04;
   --light: #dc2f02;
   --dark: #9d0208;
   --darker: #6a040f;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  margin: 50px;
+  background-color: #faa307;
+}
+
+#root {
+  margin: auto;
 }
 
 .App {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 25px;
   align-items: center;
   width: 300px;
   background-color: var(--background);
   border: 2px solid var(--border);
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .App_text-box {
@@ -32,7 +36,7 @@
   padding: 10px;
   background-color: var(--light);
   border: 2px solid var(--border);
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .App_buttons {

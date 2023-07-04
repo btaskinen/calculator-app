@@ -106,7 +106,7 @@ const buttons: Buttons = [
   {
     label: '=',
     type: 'ACTION',
-    color: 'dark',
+    color: 'yellow',
   },
 ];
 
