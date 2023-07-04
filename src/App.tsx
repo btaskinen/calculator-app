@@ -114,55 +114,45 @@ const App = () => {
   const [displayNumber, setDisplayNumber] = useState('0');
   const [calcNumber, setCalcNumber] = useState('0');
   const [operator, setOperator] = useState('');
+  const [newNumber, setNewNumber] = useState(true);
 
   const operatorButtonPressed = (label: string): void => {
     switch (operator) {
       case '':
         setCalcNumber(displayNumber);
         setOperator(label);
+        setNewNumber(true);
         break;
       case '+':
-        setCalcNumber(String(Number(displayNumber) + Number(calcNumber)));
+        setCalcNumber(String(Number(calcNumber) + Number(displayNumber)));
+        setDisplayNumber(String(Number(calcNumber) + Number(displayNumber)));
+        setNewNumber(true);
         break;
       case '-':
-        setCalcNumber(String(Number(displayNumber) - Number(calcNumber)));
+        setCalcNumber(String(Number(calcNumber) - Number(displayNumber)));
+        setDisplayNumber(String(Number(calcNumber) - Number(displayNumber)));
+        setNewNumber(true);
         break;
       case 'X':
-        setCalcNumber(String(Number(displayNumber) * Number(calcNumber)));
+        setCalcNumber(String(Number(calcNumber) * Number(displayNumber)));
+        setDisplayNumber(String(Number(calcNumber) * Number(displayNumber)));
+        setNewNumber(true);
         break;
-      case '-':
-        setCalcNumber(String(Number(displayNumber) / Number(calcNumber)));
+      case '/':
+        setCalcNumber(String(Number(calcNumber) / Number(displayNumber)));
+        setDisplayNumber(String(Number(calcNumber) / Number(displayNumber)));
+        setNewNumber(true);
         break;
     }
     setOperator(label);
   };
 
   const numberButtonPressed = (label: string): void => {
-    switch (operator) {
-      case '':
-        if (displayNumber === '0') {
-          setDisplayNumber(label);
-          setCalcNumber(label);
-        } else {
-          setDisplayNumber(displayNumber + label);
-        }
-        break;
-      case '+':
-        const resultAddition = Number(displayNumber) + Number(label);
-        setCalcNumber(String(resultAddition));
-        break;
-      case '-':
-        const resultSubstraction = Number(calcNumber) - Number(label);
-        setCalcNumber(String(resultSubstraction));
-        break;
-      case 'X':
-        const resultMultiplication = Number(calcNumber) * Number(label);
-        setCalcNumber(String(resultMultiplication));
-        break;
-      case '/':
-        const resultDivision = Number(calcNumber) / Number(label);
-        setCalcNumber(String(resultDivision));
-        break;
+    if (newNumber === true) {
+      setDisplayNumber(label);
+      setNewNumber(false);
+    } else {
+      setDisplayNumber(displayNumber + label);
     }
   };
 
@@ -172,6 +162,7 @@ const App = () => {
         setCalcNumber('0');
         setDisplayNumber('0');
         setOperator('');
+        setNewNumber(true);
         break;
       case '+/-':
         const changeSign = Number(calcNumber) * -1;
@@ -188,23 +179,28 @@ const App = () => {
           case '':
             break;
           case '+':
-            const resultAddition = Number(displayNumber) + Number(label);
+            const resultAddition = Number(calcNumber) + Number(displayNumber);
+            setDisplayNumber(String(resultAddition));
             setCalcNumber(String(resultAddition));
             break;
           case '-':
-            const resultSubstraction = Number(calcNumber) - Number(label);
+            const resultSubstraction =
+              Number(calcNumber) - Number(displayNumber);
+            setDisplayNumber(String(resultSubstraction));
             setCalcNumber(String(resultSubstraction));
             break;
           case 'X':
-            const resultMultiplication = Number(calcNumber) * Number(label);
+            const resultMultiplication =
+              Number(calcNumber) * Number(displayNumber);
+            setDisplayNumber(String(resultMultiplication));
             setCalcNumber(String(resultMultiplication));
             break;
           case '/':
-            const resultDivision = Number(calcNumber) / Number(label);
+            const resultDivision = Number(calcNumber) / Number(displayNumber);
+            setDisplayNumber(String(resultDivision));
             setCalcNumber(String(resultDivision));
             break;
         }
-        setDisplayNumber(calcNumber);
         setOperator('');
         break;
     }
